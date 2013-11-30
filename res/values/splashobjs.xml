@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!--  This is the list of agencies in this app. Keep these alphabetized
+    c = code
+    p = displayname 
+   -->
+    
+    <string name="a3_c">actransit</string>
+    <string name="a3_p">AC Transit</string>
+    
+    <string name="a4_c">BART</string>
+    <string name="a4_p">BART</string>
+    
+    <string name="a5_c">Caltrain</string>
+    <string name="a5_p">Caltrain</string>
+    
+    <string name="a6_c">dumbarton</string>
+    <string name="a6_p">Dumbarton Express</string>
+    
+    <string name="a7_c">emery</string>
+    <string name="a7_p">Emery-Go-Round</string>
+    
+    <string name="a8_c">SamTrans</string>
+    <string name="a8_p">SamTrans</string>
+    
+    <string name="a9_c">sf-muni</string>
+    <string name="a9_p">San Francisco Muni</string>
+    
+    <string name="a10_c">ucsf</string>
+    <string name="a10_p">University of California San Francisco</string>
+    
+    <string name="a11_c">VTA</string>
+    <string name="a11_p">VTA</string>
+    
+    <string name="a12_c">WESTCAT</string>
+    <string name="a12_p">WestCAT</string>
+    
+</resources>

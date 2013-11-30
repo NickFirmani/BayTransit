@@ -1,0 +1,45 @@
+List of Agencies - BayTransit
+
+511
+--
+BART
+Caltrain
+Dumbarton Express
+SamTrans
+SF-Muni
+VTA 
+Westcat
+
+NextBus
+----
+AC Transit
+Emery Go Round
+UCSF
+
+Other tbd
+---
+BearTransit (customize self)
+Bay Ferries
+LBNL
+
+List of Permissions Desired:
+-----
+Internal storage
+Wifi/Data
+Position rough
+Position fine
+NFC
+Internet 
+
+Alphalist:
+------
+AC Transit 3 nb
+Bart 4 
+Caltrain 5
+Dumbarton 6 nb
+Emery 7 nb
+SamTrans 8 
+SfMuni 9 nb
+UCSF 10 nb
+VTA 11 
+Westcat 12

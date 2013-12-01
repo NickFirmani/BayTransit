@@ -28,8 +28,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ListRoutes extends Activity {
 	
@@ -40,37 +42,32 @@ public class ListRoutes extends Activity {
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_routes);
         Intent intent = getIntent();
         agency = intent.getParcelableExtra("agency");
         setTitle(agency.getDisplayName());
+        
         makeApiUrl();
 		agXmlFile = new File(getFilesDir(), fileprefix);
-        if (isxmlOld()) {
-        	agXmlFile = getRoutes();
-        	Log.d("LR", "XML was old");
-        } else {
-        	Log.d("LR", "XML was fresh");
-        }
-        
-        try {
-			parseAgencyXML(agXmlFile);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+        if (isxmlOld()) {agXmlFile = getRoutes();}
+        parseAgencyXML(agXmlFile);
+		
         final ListView listview = (ListView) findViewById(R.id.listview);
         final RouteAdapter routelist = new RouteAdapter(this, agency);
         listview.setAdapter(routelist);
-        
+        listview.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parents, View v, int position, long id) {
+				onRouteClick(listview.getItemAtPosition(position));
+			}
+		});
         
         // Show the Up button in the action bar.
         setupActionBar();
     }
     
-    private void parseAgencyXML(File agencyxmlloc) throws IOException {
+    private void parseAgencyXML(File agencyxmlloc) {
     	//takes xml file and adds it to agency info.
     	//agency.getapistem() = 0 is for nextbus
     	// 1 for 511
@@ -113,10 +110,18 @@ public class ListRoutes extends Activity {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
     	finally {
     		if (inp != null) {
-    			inp.close();
+    			try {
+					inp.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     		}
     	}
     	
@@ -124,8 +129,8 @@ public class ListRoutes extends Activity {
 
 	private boolean isxmlOld() {
     	//return false if XML file is there and fresh
-    	if (agXmlFile.length() > 50) {
     		long created = agXmlFile.lastModified();
+    	if (created != 0) {
     		long currtime = System.currentTimeMillis();
     		long allowable = Long.valueOf("7884000000"); /*Three Months*/ //TODO put in values
     		return currtime - created < allowable ? false : true;
@@ -140,7 +145,6 @@ public class ListRoutes extends Activity {
     		getString(R.string.agency_api_stem_1);
     	String api1 = agency.getNameCode();
     	apiurl = api0 + api1;
-    	
     	String f0 = val == 0 ? "nb" : "51";
     	fileprefix = f0 + api1;
     }
@@ -181,12 +185,20 @@ public class ListRoutes extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-    
-    /* ------------------Dataget ------------------- */
-    public void onRouteClick(View view) {
-    	//dostuff on click
+
+    public void onRouteClick(Object object) {
+    	if (object instanceof Route) {
+    		Intent routeIntent = new Intent(this, ListDirections.class);
+    		routeIntent.putExtra("agency", agency);
+    		routeIntent.putExtra("route", (Route) object);
+    		routeIntent.putExtra("agXML", agXmlFile);
+    		startActivity(routeIntent);
+    	}
 
     }
+    
+    /* ------------------Dataget ------------------- */
+    
     public File getRoutes() {
     	File retfile = null;
 		ConnectivityManager connMgr = (ConnectivityManager) 
@@ -194,7 +206,7 @@ public class ListRoutes extends Activity {
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
     	if (networkInfo != null && networkInfo.isConnected()) {
     		try {
-				retfile = new QueryAgencyAPI().execute(apiurl).get();
+				retfile = new QueryAgencyAPI().execute(apiurl).get(); //dont do this. TODO
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -221,7 +233,7 @@ public class ListRoutes extends Activity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(File result) {
-            //do? 
+            //DO
         }
         private File downloadUrl(String urlq) throws IOException {
         	InputStream is = null;

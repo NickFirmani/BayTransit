@@ -247,7 +247,7 @@ containing a value of this type.
         public static final int sample_7=0x7f020009;
     }
     public static final class id {
-        public static final int action_settings=0x7f040014;
+        public static final int action_settings=0x7f040016;
         public static final int alignBounds=0x7f040002;
         public static final int alignMargins=0x7f040003;
         public static final int bottom=0x7f040005;
@@ -256,28 +256,34 @@ containing a value of this type.
         public static final int center_vertical=0x7f040008;
         public static final int clip_horizontal=0x7f04000f;
         public static final int clip_vertical=0x7f04000e;
+        public static final int direction1=0x7f040012;
+        public static final int direction2=0x7f040013;
         public static final int end=0x7f040011;
         public static final int fill=0x7f04000d;
         public static final int fill_horizontal=0x7f04000b;
         public static final int fill_vertical=0x7f040009;
-        public static final int gridview=0x7f040013;
+        public static final int gridview=0x7f040015;
         public static final int horizontal=0x7f040000;
         public static final int left=0x7f040006;
-        public static final int listview=0x7f040012;
+        public static final int listview=0x7f040014;
         public static final int right=0x7f040007;
         public static final int start=0x7f040010;
         public static final int top=0x7f040004;
         public static final int vertical=0x7f040001;
     }
     public static final class layout {
-        public static final int activity_list_routes=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_routes_page=0x7f030002;
+        public static final int activity_list_directions=0x7f030000;
+        public static final int activity_list_routes=0x7f030001;
+        public static final int activity_list_stops=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_routes_page=0x7f030004;
     }
     public static final class menu {
-        public static final int list_routes=0x7f090000;
-        public static final int main=0x7f090001;
-        public static final int routes_page=0x7f090002;
+        public static final int list_directions=0x7f090000;
+        public static final int list_routes=0x7f090001;
+        public static final int list_stops=0x7f090002;
+        public static final int main=0x7f090003;
+        public static final int routes_page=0x7f090004;
     }
     public static final class string {
         public static final int a10_c=0x7f07000e;
@@ -306,16 +312,19 @@ containing a value of this type.
         public static final int a9_c=0x7f07000c;
         public static final int a9_p=0x7f07000d;
         public static final int action_settings=0x7f070018;
-        public static final int agency_api_stem_0=0x7f07001d;
-        public static final int agency_api_stem_1=0x7f07001e;
+        public static final int agency_api_stem_0=0x7f07001e;
+        public static final int agency_api_stem_1=0x7f07001f;
         public static final int app_name=0x7f070014;
         public static final int dummy_button=0x7f070015;
         public static final int dummy_content=0x7f070016;
         public static final int hello_world=0x7f070019;
-        public static final int route_data_err=0x7f07001c;
-        public static final int title_activity_list_routes=0x7f07001b;
+        public static final int hello_world2=0x7f07001a;
+        public static final int route_data_err=0x7f07001d;
+        public static final int title_activity_list_directions=0x7f070020;
+        public static final int title_activity_list_routes=0x7f07001c;
+        public static final int title_activity_list_stops=0x7f070021;
         public static final int title_activity_main=0x7f070017;
-        public static final int title_activity_routes_page=0x7f07001a;
+        public static final int title_activity_routes_page=0x7f07001b;
     }
     public static final class style {
         /** 

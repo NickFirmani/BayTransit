@@ -20,7 +20,7 @@ public class RouteAdapter extends BaseAdapter {
 		Collection<Route> rou = _agency.getAllRoutes();
 		for (Iterator<Route> rouIter = rou.iterator(); rouIter.hasNext();) {
 			Route tempr = rouIter.next();
-			_routes.add(tempr.getRouteName());
+			_routes.add(tempr.getRouteName()); //TODO fix this data struct?
 		}
 	}
 

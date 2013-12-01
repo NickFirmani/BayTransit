@@ -7,14 +7,14 @@
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="18" />
-    
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.SET_ALARM" />
-    <!--   uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /-->
+    <!-- uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" / -->
 
     <application
         android:allowBackup="true"
@@ -40,7 +40,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.github.baytransit.MainActivity" />
         </activity>
+        <activity
+            android:name="com.github.baytransit.ListDirections"
+            android:label="@string/title_activity_list_directions" >
+        </activity>
+        <activity
+            android:name="com.github.baytransit.ListStops"
+            android:label="@string/title_activity_list_stops" >
+        </activity>
     </application>
 
 </manifest>
-

@@ -15,12 +15,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ListDirections extends Activity {
 	private Agency agency;
 	private Route route;
 	private File agXmlFile;
-	private String[] dirDispNames = {,};
+	private String[] dirDispNames = {"this is", "hidden"};
 	private File stopXmlFile;
 	
 	@Override
@@ -31,6 +32,7 @@ public class ListDirections extends Activity {
         agency = intent.getParcelableExtra("agency");
         //download xml in bg
         if (agency.gethasDir() == false) {
+        	Toast.makeText(this, "this agency has no direction", Toast.LENGTH_SHORT).show();
         	//next activity.
         }
         route = intent.getParcelableExtra("route");
@@ -40,7 +42,11 @@ public class ListDirections extends Activity {
         if (apistem == 0) {
         	showFiveOneOneDirs(agXmlFile);
         } else if (apistem == 1) {
-        	//do nextbus stuffs (requires downloaded xml)
+        	Toast.makeText(this, "im on a plane.", Toast.LENGTH_SHORT).show();
+        	dirDispNames[0] = "lol";
+        	dirDispNames[1] = "lolol";
+        	//wait for bg task
+        	//showNextBusDirs(stopXmlFile);
         }
         //set string names appropriately. 
         final TextView dir1view = (TextView) findViewById(R.id.direction1);
@@ -58,45 +64,46 @@ public class ListDirections extends Activity {
             XmlPullParser xpp = factory.newPullParser();
             xpp.setInput(inp);
             int eventType = xpp.getEventType();
-            int dircount = 0;
-            String[] dirnames = {};
+            String[] dirnames = {"should not", "see this"};
             while (eventType != XmlPullParser.END_DOCUMENT) {
             	String name = xpp.getName();
             	if (xpp.getEventType() == XmlPullParser.START_TAG &&
                 		agency.getAPIstem() == 0) {
-                	if (name != null && name.equals("Route Direction")) {
-                		dirnames[dircount] = xpp.getAttributeValue(null, "Code");
-               			dirDispNames[dircount] = xpp.getAttributeValue(null, "Name");
-               			dircount += 1;
-               		}
+            		if (name != null && name.equals("Route") && 
+            				xpp.getAttributeValue(null, "Code").equals(route.getRouteNameCode())) {
+            			xpp.nextTag();
+            			xpp.nextTag();
+            			dirnames[0] = xpp.getAttributeValue(null, "Code");
+            			dirDispNames[0] = xpp.getAttributeValue(null, "Name");
+            			xpp.nextTag();
+            			xpp.getName();
+            			dirnames[1] = xpp.getAttributeValue(null, "Code");
+            			dirDispNames[1] = xpp.getAttributeValue(null, "Name");
+            		}
              	}
                	eventType = xpp.next();
             }
             RouteFiveOneOne tr = (RouteFiveOneOne) route;
             tr.setDirNames(dirnames);
         } catch (XmlPullParserException e) {
-    		// TODO Auto-generated catch block
-   			e.printStackTrace();
+    		Log.e("ListDirections", e.getMessage());
    		} catch (FileNotFoundException e) {
-   			// TODO Auto-generated catch block
-   			e.printStackTrace();
+   			Log.e("ListDirections", e.getMessage());
    		} catch (IOException e) {
-    		// TODO Auto-generated catch block
-   			e.printStackTrace();
+   			Log.e("ListDirections", e.getMessage());
    		} 
        	finally {
         	if (inp != null) {
        			try {
     				inp.close();
    				} catch (IOException e) {
-   					// TODO Auto-generated catch block
-   					e.printStackTrace();
+   					Log.e("ListDirections", e.getMessage());
    				}
       		}
         }
 	}
 	
-	private void showNextBusDirs(File rouXml) {
+	private void showNextBusDirs(File rouXml) { //TODO merge these
 		FileReader inp = null;
     	try {
     		inp = new FileReader(rouXml);
@@ -112,7 +119,7 @@ public class ListDirections extends Activity {
             	if (xpp.getEventType() == XmlPullParser.END_TAG &&
             			agency.getAPIstem() == 1) {
                 	if (name != null && name.equals("direction")) {
-                		dirnames[dircount] = xpp.getAttributeValue(null, "name");
+                		dirnames[dircount] = xpp.getAttributeValue(null, "tag");
                 		dirDispNames[dircount] = xpp.getAttributeValue(null, "title");
                 		if (xpp.getAttributeValue(null, "useForUI").equals("false")) {
                 			Log.e("Stop511", "Shouldn't use this for UI?");
@@ -126,22 +133,18 @@ public class ListDirections extends Activity {
             tr.setDirNames(dirnames);
             
         } catch (XmlPullParserException e) {
-    		// TODO Auto-generated catch block
-   			e.printStackTrace();
+        	Log.e("ListDirections", e.getMessage());
    		} catch (FileNotFoundException e) {
-   			// TODO Auto-generated catch block
-   			e.printStackTrace();
+   			Log.e("ListDirections", e.getMessage());
    		} catch (IOException e) {
-    		// TODO Auto-generated catch block
-   			e.printStackTrace();
+   			Log.e("ListDirections", e.getMessage());
    		} 
        	finally {
         	if (inp != null) {
        			try {
     				inp.close();
    				} catch (IOException e) {
-   					// TODO Auto-generated catch block
-   					e.printStackTrace();
+   					Log.e("ListDirections", e.getMessage());
    				}
       		}
         }

@@ -10,7 +10,6 @@ import android.util.Log;
 public class RouteFiveOneOne extends Route implements Parcelable {
     private String _routeName;
     private String _routeCode;
-    private Boolean _directional;
     private String _direction1;
     private String _direction2;
     private Map<String, Stop> _stops1 = new LinkedHashMap<String, Stop>();
@@ -22,34 +21,22 @@ public class RouteFiveOneOne extends Route implements Parcelable {
     	_routeCode = tempsarr[1];
     	_direction1 = tempsarr[2];
     	_direction2 = tempsarr[3];
-    	_directional = in.createBooleanArray()[0];
     }
     
     public RouteFiveOneOne(String routeCode) {
         _routeCode = routeCode;
-        _directional = false;
     }
     public RouteFiveOneOne(String routeCode, String routeName) {
     	_routeCode = routeCode;
     	_routeName = routeName;
     }
-
-    public RouteFiveOneOne(String routeCode, Boolean directional) {
-        _routeCode = routeCode;
-        _directional = directional;
-    }
     public void writeToParcel(Parcel out, int flags) {
     	try {
     		String[] temparr = {_routeName, _routeCode, _direction1, _direction2};
     		out.writeStringArray(temparr);
-    		boolean[] tempbool = {_directional};
-    		out.writeBooleanArray(tempbool);
     	} catch (NullPointerException e) { // Not good code, bool should be init.
     		Log.e("511WriteParcel", "Null pointer :(");
     	}
-    }
-    public void setDirectional(boolean val) {
-    	_directional = val;
     }
     public void setRouteName(String name) {
         _routeName = name;
@@ -63,6 +50,13 @@ public class RouteFiveOneOne extends Route implements Parcelable {
     public void setDirNames(String[] names) {
     	if (names.length != 2) {
     		Log.e("Route511", "Malformed Args");
+    		try {
+    			_direction1 = names[0];
+        		_direction2 = names[1];
+    		} catch (Exception e) {
+    			Log.wtf("AW MAN", "BOOO");
+    			Log.e("msg", e.getMessage());
+    		}
     	} else {
     		_direction1 = names[0];
     		_direction2 = names[1];

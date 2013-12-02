@@ -94,33 +94,24 @@ public class ListRoutes extends Activity {
            				String routetitle = xpp.getAttributeValue(null, "Name");
            				String routecode = xpp.getAttributeValue(null, "Code");
            				RouteFiveOneOne rc = new RouteFiveOneOne(routecode, routetitle);
-           				xpp.next(); //dangerous hack
-           				if (xpp.getName() != null && xpp.getName().equals("RouteDirectionList")) {
-           					rc.setDirectional(true);
-           					Log.d("511", "Set Directional");
-           				}
            				agency.addRoute(routecode, rc);
            			}
            		}
             	eventType = xpp.next();
             }
     	} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+    		Log.e("ListRoutes", e.getMessage());
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e("ListRoutes", e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e("ListRoutes", e.getMessage());
 		} 
     	finally {
     		if (inp != null) {
     			try {
 					inp.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Log.e("ListRoutes", e.getMessage());
 				}
     		}
     	}
@@ -132,7 +123,7 @@ public class ListRoutes extends Activity {
     		long created = agXmlFile.lastModified();
     	if (created != 0) {
     		long currtime = System.currentTimeMillis();
-    		long allowable = Long.valueOf("7884000000"); /*Three Months*/ //TODO put in values
+    		long allowable = Long.valueOf(R.string.max_route_age_millis);
     		return currtime - created < allowable ? false : true;
     	} else {
     		return true;
@@ -208,11 +199,9 @@ public class ListRoutes extends Activity {
     		try {
 				retfile = new QueryAgencyAPI().execute(apiurl).get(); //dont do this. TODO
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Log.e("ListRoutes/getRoutes", e.getMessage());
 			} catch (ExecutionException e) {
-				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-				Log.e("getRoutes", e.getMessage());
+				Log.e("ListRoutes/getRoutes", e.getMessage());
 			}
     	} else {
     	Toast.makeText(this, R.string.route_data_err, Toast.LENGTH_SHORT).show();
@@ -227,7 +216,8 @@ public class ListRoutes extends Activity {
             try {
                 return downloadUrl(urls[0]);
             } catch (IOException e) {
-            	return null; //raise an error here TODO
+            	Log.e("ListRoutes/background", e.getMessage());
+            	return null;
             }
         }
         // onPostExecute displays the results of the AsyncTask.
@@ -259,9 +249,7 @@ public class ListRoutes extends Activity {
         	}
         }
         private File readIt(InputStream inp, String fileprefix) throws IOException {
-        	//File file;
         	try {
-                //file = File.createTempFile(fileprefix, null, getCacheDir());
                 FileOutputStream out = new FileOutputStream(agXmlFile);
                 try { //replace this with buffered implementation TODO
                 	while (true) {

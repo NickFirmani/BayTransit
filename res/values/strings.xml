@@ -17,5 +17,7 @@
     <string name="agency_api_stem_1">http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&amp;a=</string>
     <string name="title_activity_list_directions">ListDirections</string>
     <string name="title_activity_list_stops">ListStops</string>
+    
+    <string name="max_route_age_millis">7884000000</string>
 
 </resources>

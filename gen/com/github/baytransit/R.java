@@ -319,6 +319,7 @@ containing a value of this type.
         public static final int dummy_content=0x7f070016;
         public static final int hello_world=0x7f070019;
         public static final int hello_world2=0x7f07001a;
+        public static final int max_route_age_millis=0x7f070022;
         public static final int route_data_err=0x7f07001d;
         public static final int title_activity_list_directions=0x7f070020;
         public static final int title_activity_list_routes=0x7f07001c;

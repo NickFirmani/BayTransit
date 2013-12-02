@@ -11,7 +11,6 @@ import android.util.Log;
 public class RouteNextBus extends Route {
 	    private String _routeName;
 	    private String _routeCode;
-	    private Boolean _directional;
 	    private String _direction1;
 	    private String _direction2;
 	    private Map<String, Stop> _stops1 = new LinkedHashMap<String, Stop>();
@@ -23,12 +22,10 @@ public class RouteNextBus extends Route {
 	    	_routeCode = tempsarr[1];
 	    	_direction1 = tempsarr[2];
 	    	_direction2 = tempsarr[3];
-	    	_directional = in.createBooleanArray()[0];
 	    }
 	    
 	    public RouteNextBus(String routeCode) {
 	        _routeCode = routeCode;
-	        _directional = false;
 	    }
 	    public RouteNextBus(String routeCode, String routeName) {
 	        _routeCode = routeCode;
@@ -38,10 +35,8 @@ public class RouteNextBus extends Route {
 	    	try { 
 	    		String[] temparr = {_routeName, _routeCode, _direction1, _direction2};
 	    		out.writeStringArray(temparr);
-	    		boolean[] tempbool = {_directional};
-	    		out.writeBooleanArray(tempbool);
 	    	} catch (NullPointerException e) {
-	    		Log.e("nbParcelErr", "Null pointer exception"); 
+	    		Log.wtf("nbParcelErr", "Null pointer exception"); 
 	    	}
 	    }
 	    public void setRouteName(String name) {

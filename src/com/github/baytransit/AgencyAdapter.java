@@ -2,6 +2,7 @@ package com.github.baytransit;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ public class AgencyAdapter extends BaseAdapter {
 	
 	public AgencyAdapter(Context c) {
 		mContext = c;
+		res = mContext.getResources();
+		buildarray();
 	}
 	
 	public int getCount() {
@@ -22,7 +25,8 @@ public class AgencyAdapter extends BaseAdapter {
 		if (objlist.size() != 0) {
 			return objlist.size();
 		} else {
-			return 13;
+			Log.e("AgencyAdapter", "Went to bad code.");
+			return 13; 
 		}
 	}
 	
@@ -38,8 +42,6 @@ public class AgencyAdapter extends BaseAdapter {
 	 */
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView;
-		res = mContext.getResources();
-		buildarray();
 		if (convertView == null) {
 			imageView = new ImageView(mContext);
 			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));

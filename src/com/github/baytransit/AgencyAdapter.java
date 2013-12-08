@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import com.github.NickFirmani.baytransit.R;
 
 public class AgencyAdapter extends BaseAdapter {
 	private Context mContext;
@@ -63,7 +64,7 @@ public class AgencyAdapter extends BaseAdapter {
 	}
 
 	private SparseArray<Object> objlist = new SparseArray<Object>();
-	
+	//TODO make this an async task
 	private void buildarray() {
 		//Icon i0 = new icon("meh");
 		//Icon i1 = new icon("bleh");

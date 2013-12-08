@@ -3,6 +3,7 @@ package com.github.baytransit;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import com.github.NickFirmani.baytransit.R;
 
 public class ListStops extends Activity {
 

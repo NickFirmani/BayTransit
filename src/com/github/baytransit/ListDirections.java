@@ -10,12 +10,19 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.NickFirmani.baytransit.R;
 
 public class ListDirections extends Activity {
 	private Agency agency;
@@ -23,36 +30,45 @@ public class ListDirections extends Activity {
 	private File agXmlFile;
 	private String[] dirDispNames = {"this is", "hidden"};
 	private File stopXmlFile;
+	ProgressBar progbar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_directions);
+		progbar = (ProgressBar) findViewById(R.id.listdir_progressbar);
 		Intent intent = getIntent();
         agency = intent.getParcelableExtra("agency");
-        //download xml in bg
+        //TODO change xml download implementation
+        
         if (agency.gethasDir() == false) {
         	Toast.makeText(this, "this agency has no direction", Toast.LENGTH_SHORT).show();
-        	//next activity.
+        	nextActivity("rl");
         }
+        
         route = intent.getParcelableExtra("route");
         agXmlFile = (File) intent.getSerializableExtra("agXML");
         setTitle(agency.getDisplayName());
         int apistem = agency.getAPIstem();
         if (apistem == 0) {
         	showFiveOneOneDirs(agXmlFile);
+        	doOnFinish();
         } else if (apistem == 1) {
-        	Toast.makeText(this, "im on a plane.", Toast.LENGTH_SHORT).show();
-        	dirDispNames[0] = "lol";
-        	dirDispNames[1] = "lolol";
-        	//wait for bg task
-        	//showNextBusDirs(stopXmlFile);
+        	String temp = "http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=%s&r=%s";
+        	String apiurl = String.format(temp, agency.getNameCode(), route.getRouteNameCode());
+        	stopXmlFile = new File(getFilesDir(), apiurl.substring(apiurl.length()-15).replaceAll("[^a-zA-Z]",""));
+        	getRoutesXML(apiurl);
         }
-        //set string names appropriately. 
-        final TextView dir1view = (TextView) findViewById(R.id.direction1);
+	}
+	
+	private void doOnFinish() {
+		final TextView dir1view = (TextView) findViewById(R.id.direction1);
         final TextView dir2view = (TextView) findViewById(R.id.direction2);
         dir1view.setText(dirDispNames[0]);
         dir2view.setText(dirDispNames[1]);
+        progbar.setVisibility(View.GONE);
+        dir1view.setVisibility(View.VISIBLE);
+        dir2view.setVisibility(View.VISIBLE);
 	}
 	
 	private void showFiveOneOneDirs(File agXml) {
@@ -76,7 +92,7 @@ public class ListDirections extends Activity {
             			dirnames[0] = xpp.getAttributeValue(null, "Code");
             			dirDispNames[0] = xpp.getAttributeValue(null, "Name");
             			xpp.nextTag();
-            			xpp.getName();
+            			xpp.nextTag();
             			dirnames[1] = xpp.getAttributeValue(null, "Code");
             			dirDispNames[1] = xpp.getAttributeValue(null, "Name");
             		}
@@ -113,17 +129,13 @@ public class ListDirections extends Activity {
             xpp.setInput(inp);
             int eventType = xpp.getEventType();
             int dircount = 0;
-            String[] dirnames = {};
+            String[] dirnames = {"this is", "invisible"};
             while (eventType != XmlPullParser.END_DOCUMENT) {
             	String name = xpp.getName();
-            	if (xpp.getEventType() == XmlPullParser.END_TAG &&
-            			agency.getAPIstem() == 1) {
+            	if (xpp.getEventType() == XmlPullParser.START_TAG) {
                 	if (name != null && name.equals("direction")) {
                 		dirnames[dircount] = xpp.getAttributeValue(null, "tag");
                 		dirDispNames[dircount] = xpp.getAttributeValue(null, "title");
-                		if (xpp.getAttributeValue(null, "useForUI").equals("false")) {
-                			Log.e("Stop511", "Shouldn't use this for UI?");
-                		}
                			dircount += 1;
                		}
              	}
@@ -149,12 +161,41 @@ public class ListDirections extends Activity {
       		}
         }
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.list_directions, menu);
 		return true;
 	}
-
+	
+	public void getRoutesXML(String apiurl) {
+		ConnectivityManager connMgr = (ConnectivityManager) 
+    	getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+    	if (networkInfo != null && networkInfo.isConnected()) {
+    			class ApiListStops extends GetApiData {
+    				protected void onPreExecute() {
+    					progbar.setVisibility(View.VISIBLE);
+    				}
+    				protected void onPostExecute(File toReturn) {
+    					stopXmlFile = toReturn;
+    					doOnFinish();
+    				}
+    			}
+				new ApiListStops().execute(apiurl, getFilesDir().getPath());
+    	} else {
+    	Toast.makeText(this, R.string.route_data_err, Toast.LENGTH_SHORT).show();
+    	}
+    }
+	
+	private void nextActivity(String name) {
+		if (name.equals("rl")) {
+			//start routeslist
+		}
+	}
+	
 }
+
+
+

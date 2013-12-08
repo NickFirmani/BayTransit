@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import com.github.NickFirmani.baytransit.R;
 
 public class MainActivity extends Activity {
 

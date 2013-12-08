@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="@string/hello_world" />
+        android:text="@string/hello_world"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/direction2"
@@ -23,6 +24,15 @@
         android:layout_alignRight="@+id/direction1"
         android:layout_below="@+id/direction1"
         android:layout_marginTop="30dp"
-        android:text="@string/hello_world2" />
+        android:text="@string/hello_world2"
+        android:visibility="invisible" />
+    <ProgressBar
+        android:id="@+id/listdir_progressbar"
+        style="@android:style/Widget.ProgressBar.Inverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminate="true" />
 
 </RelativeLayout>

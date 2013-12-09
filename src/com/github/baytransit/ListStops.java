@@ -43,24 +43,27 @@ public class ListStops extends Activity {
 		setContentView(R.layout.activity_list_stops);
 		mListview = (ListView) findViewById(R.id.stops_listview);
         mProgbar = (ProgressBar) findViewById(R.id.stops_progressbar);
-        
 		Intent mIntent = getIntent();
         mAgency = mIntent.getParcelableExtra("agency");
 		mRoute = mIntent.getParcelableExtra("route");
-		int tempint = mIntent.getIntExtra("dirstem", -1);
-		if (tempint >= 0) {mRoute.getDirNames(tempint);}
+		mDirCode = mIntent.getStringExtra("dir");
+		setTitle(mRoute.getRouteName() + ": " + mDirCode); //FIXME
+		mDirCode = mDirCode.replaceAll(" ", "%20");	
+		Log.d("liststops", "mdircode is: " + mDirCode);
 		
-		if (mIntent.hasExtra("routeXml")) { //for nextbus
+		if (mAgency.getAPIstem() == 1) { //for nextbus
 			routeXml = (File) mIntent.getSerializableExtra("routeXml");
-			Log.d("apifile", "yes");
+			Log.d("apifile", "yes : no display");
 			parseNbXml(routeXml);
 			doOnFinish();
-		} else { //for 511 //FIXME
+			
+		} else if (mAgency.getAPIstem() == 0) { //for 511 //FIXME
 			String temp = "http://services.my511.org/Transit2.0/GetStopsForRoute.aspx?token=7e3c99b6-1126-4e23-af9e-26cd5e5e0197&routeIDF=%s~%s~%s";
 			String apiurl = String.format(temp, mAgency.getNameCode(), mRoute.getRouteNameCode(), mDirCode);
 			Log.d("apiurl", apiurl);
 			getRoutesXML(apiurl);
-			doOnFinish();
+		} else {
+			Log.e("ERR", "ERR");
 		}
 	}
 	
@@ -76,6 +79,7 @@ public class ListStops extends Activity {
     				protected void onPostExecute(File toReturn) {
     					routeXml = toReturn;
     					parseFiveXml(routeXml);
+    					doOnFinish();
     				}
     			}
 				new ApiListStops().execute(apiurl, getFilesDir().getPath());
@@ -133,6 +137,7 @@ public class ListStops extends Activity {
         }
 	}
 	private void doOnFinish() {
+		Log.d("doOnFinish", "Finishing");
 		final StopAdapter stoplist = new StopAdapter(this, mRoute);
         mListview.setAdapter(stoplist);
         mProgbar.setVisibility(View.GONE);
@@ -143,6 +148,6 @@ public class ListStops extends Activity {
 			}
 		});
 	}
-	private void onRouteClick(Object routein) {}
+	private void onRouteClick(Object stopin) {}
 
 }

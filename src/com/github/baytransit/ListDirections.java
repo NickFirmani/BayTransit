@@ -149,8 +149,10 @@ public class ListDirections extends Activity {
             	if (xpp.getEventType() == XmlPullParser.START_TAG) {
                 	if (name != null && name.equals("direction")) {
                 		dirnames[dircount] = xpp.getAttributeValue(null, "tag");
+                		Log.d("Direction tag", xpp.getAttributeValue(null, "tag"));
                 		dirDispNames[dircount] = xpp.getAttributeValue(null, "title");
-               			dircount += 1;
+                		Log.d("Direction titlex", xpp.getAttributeValue(null, "title"));
+               			dircount += 1; //TODO Plan for more than 2 directions (WTF)
                		}
              	}
                	eventType = xpp.next();
@@ -212,7 +214,8 @@ public class ListDirections extends Activity {
 		if (stopXmlFile != null && stopXmlFile.length() > 0) {
 			dirIntent.putExtra("routeXML", stopXmlFile);
 		}
-		dirIntent.putExtra("dirstem", n);
+		dirIntent.putExtra("dir", route.getDirNames(n)); 
+		Log.d("LD Log", route.getDirNames(n)); //correct for nextbus    
 		startActivity(dirIntent);
 	}
 	

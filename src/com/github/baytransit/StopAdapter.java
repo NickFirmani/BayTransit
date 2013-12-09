@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.util.Log;
 
 public class StopAdapter extends BaseAdapter {
 	private Context _context;
@@ -22,6 +23,7 @@ public class StopAdapter extends BaseAdapter {
 		for (Iterator<Stop> stopIter = _stopsColl.iterator(); stopIter.hasNext();) {
 			Stop tstop = stopIter.next();
 			_stops.add(tstop);
+			Log.d("StopAdapter", "Added stop");
 		}
 	}
 

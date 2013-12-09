@@ -7,7 +7,7 @@ import java.util.Map;
 import android.os.Parcel;
 import android.os.Parcelable;
 public class Agency implements Parcelable {
-	private final String _nameCode;
+	private String _nameCode;
 	private String _displayName;
     private Boolean _hasDir;
     private int _imageid;

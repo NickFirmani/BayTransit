@@ -10,28 +10,29 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class RouteAdapter extends BaseAdapter {
+public class StopAdapter extends BaseAdapter {
 	private Context _context;
-	private Agency _agency;
-	private ArrayList<String> _routes = new ArrayList<String>();
-	public RouteAdapter(Context context, Agency agency) {
+	private Route _route;
+	private ArrayList<Stop> _stops = new ArrayList<Stop>();
+	
+	public StopAdapter(Context context, Route route) {
 		_context = context;
-		_agency = agency;
-		Collection<Route> rou = _agency.getAllRoutes();
-		for (Iterator<Route> rouIter = rou.iterator(); rouIter.hasNext();) {
-			Route tempr = rouIter.next();
-			_routes.add(tempr.getRouteName()); //TODO fix this data struct?
+		_route = route;
+		Collection<Stop> _stopsColl = _route.listStops(1).values(); //used 1
+		for (Iterator<Stop> stopIter = _stopsColl.iterator(); stopIter.hasNext();) {
+			Stop tstop = stopIter.next();
+			_stops.add(tstop);
 		}
 	}
 
 	@Override
 	public int getCount() {
-		return _routes.size();
+		return _stops.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
-		return _agency.getRoute(arg0);
+		return _stops.get(arg0);
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class RouteAdapter extends BaseAdapter {
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
 		TextView textView = new TextView(_context);
         textView.setTextSize(30);
-        textView.setText(_agency.getRoute(arg0).getRouteName());
+        textView.setText(_stops.get(arg0).getStopName());
         return textView;
 	}
 

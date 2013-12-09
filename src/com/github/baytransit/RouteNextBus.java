@@ -48,14 +48,7 @@ public class RouteNextBus extends Route {
 	    public String getRouteNameCode() {
 	        return _routeCode;
 	    }
-	    public void setDirNames(String[] names) {
-	    	if (names.length != 2) {
-	    		Log.e("RouteNextBus", "Malformed Args");
-	    	} else {
-	    		_direction1 = names[0];
-	    		_direction2 = names[1];
-	    	}
-	    }
+	    
 	    public void addStop(String stopCode, Stop stop, int dirNum) {
 	        if (dirNum == 1) {
 	            _stops1.put(stopCode, stop);

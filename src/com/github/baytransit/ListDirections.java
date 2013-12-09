@@ -39,22 +39,21 @@ public class ListDirections extends Activity {
 		progbar = (ProgressBar) findViewById(R.id.listdir_progressbar);
 		Intent intent = getIntent();
         agency = intent.getParcelableExtra("agency");
-        //TODO change xml download implementation
-        
+        //TODO change xml download implementation to background svc
         if (agency.gethasDir() == false) {
-        	Toast.makeText(this, "this agency has no direction", Toast.LENGTH_SHORT).show();
-        	nextActivity("rl");
+        	Log.d("ListDirections", "Skipped this activity, has no directions");
+        	nextActivity(-1);
         }
         
         route = intent.getParcelableExtra("route");
         agXmlFile = (File) intent.getSerializableExtra("agXML");
-        setTitle(agency.getDisplayName());
+        setTitle(route.getRouteName());
         int apistem = agency.getAPIstem();
         if (apistem == 0) {
         	showFiveOneOneDirs(agXmlFile);
-        	doOnFinish();
+        	doOnFinish();    	
         } else if (apistem == 1) {
-        	String temp = "http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=%s&r=%s";
+        	String temp = "http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=%s&r=%s"; //FIXME
         	String apiurl = String.format(temp, agency.getNameCode(), route.getRouteNameCode());
         	stopXmlFile = new File(getFilesDir(), apiurl.substring(apiurl.length()-15).replaceAll("[^a-zA-Z]",""));
         	getRoutesXML(apiurl);
@@ -62,6 +61,9 @@ public class ListDirections extends Activity {
 	}
 	
 	private void doOnFinish() {
+		if (agency.getAPIstem() == 1) {
+			showNextBusDirs(stopXmlFile);
+		}
 		final TextView dir1view = (TextView) findViewById(R.id.direction1);
         final TextView dir2view = (TextView) findViewById(R.id.direction2);
         dir1view.setText(dirDispNames[0]);
@@ -69,6 +71,18 @@ public class ListDirections extends Activity {
         progbar.setVisibility(View.GONE);
         dir1view.setVisibility(View.VISIBLE);
         dir2view.setVisibility(View.VISIBLE);
+        dir1view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				nextActivity(0);
+			}
+		});
+        dir2view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				nextActivity(1);
+			}
+		});
 	}
 	
 	private void showFiveOneOneDirs(File agXml) {
@@ -176,7 +190,9 @@ public class ListDirections extends Activity {
     	if (networkInfo != null && networkInfo.isConnected()) {
     			class ApiListStops extends GetApiData {
     				protected void onPreExecute() {
-    					progbar.setVisibility(View.VISIBLE);
+    					if (agency.getAPIstem() == 1) {
+    						progbar.setVisibility(View.VISIBLE);
+    					}
     				}
     				protected void onPostExecute(File toReturn) {
     					stopXmlFile = toReturn;
@@ -189,10 +205,15 @@ public class ListDirections extends Activity {
     	}
     }
 	
-	private void nextActivity(String name) {
-		if (name.equals("rl")) {
-			//start routeslist
+	private void nextActivity(int n) {
+		Intent dirIntent = new Intent(this, ListStops.class);
+		dirIntent.putExtra("agency", agency);
+		dirIntent.putExtra("route", route);
+		if (stopXmlFile != null && stopXmlFile.length() > 0) {
+			dirIntent.putExtra("routeXML", stopXmlFile);
 		}
+		dirIntent.putExtra("dirstem", n);
+		startActivity(dirIntent);
 	}
 	
 }

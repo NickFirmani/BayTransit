@@ -199,18 +199,7 @@ public class ListPredictions extends Activity {
     	doOnFinishParse(1, predList);
 	}
 	private void doOnFinishParse(int agencyStem, PredictionList predList) {
-		//create adapter
-		//set adapter
-		//make visible
 		final PredictionAdapter predictAdapt = new PredictionAdapter(this, predList, routeCode);
-		Log.d("PredictionAdapter", "after" + Integer.toString(agencyStem));
-		if (predictAdapt == null) {
-			Log.wtf("PredictionAdapter", "error");
-		} else if (mListview == null) {
-			Log.wtf("Listviewmissing", "error");
-		}else if (mProgbar == null) {
-			Log.wtf("Progbarmissing", "error");
-		}
         mListview.setAdapter(predictAdapt);
         mProgbar.setVisibility(View.GONE);
         mListview.setVisibility(View.VISIBLE);

@@ -27,25 +27,37 @@ public class PredictionAdapter extends BaseAdapter {
 	public void processLines() { 
 		Log.d("PredAdapt", "ProcessingLines");
 		ArrayList<String[]> fromList = _predList.getList();
+		_lines.add((String) _context.getText(R.string.other_routes));
 		int posRoute = 0;
 		for (int k = 0; k < fromList.size(); k += 1) {
 			String[] temp = fromList.get(k);
 			if (temp[1].equals(_routeCode)) {
 				_lines.add(posRoute, formatLine(temp));
-			} else if (k == 0) {
-				_lines.add((String) _context.getText(R.string.other_routes));
+				posRoute += 1;
 				
 			} else {
 				_lines.add(formatLine(temp));
 			}
+		}
+		if (posRoute == 0) {
+			_lines.add(0, "No Predictons for this Route"); //FIXME
+		}
+		if (_lines.size() == 2) {
+			_lines.add("No other routes either :(");
 		}
 	}
 	@SuppressLint("DefaultLocale") //TODO
 	private String formatLine(String[] inpData) {
 		//takes seconds, routecode, routename , dirname
 		int seconds = Integer.parseInt(inpData[0]);
-		int minutes = seconds % 60;
-		String str = String.format("%d:%02d", minutes, seconds); 
+		int minutes = seconds / 60;
+		seconds = seconds - (minutes * 60);
+		String str;
+		if (seconds != 0) {
+			str = String.format("%d:%02d", minutes, seconds); 
+		} else {
+			str = String.format("%d minutes", minutes);
+		}
 		return inpData[2] + " in " + str + " " + inpData[3];
 	}
 	@Override
@@ -66,7 +78,7 @@ public class PredictionAdapter extends BaseAdapter {
 	@Override
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
 		TextView textView = new TextView(_context);
-        textView.setTextSize(30);
+        textView.setTextSize(20);
         textView.setText(_lines.get(arg0));
         return textView;
 	}

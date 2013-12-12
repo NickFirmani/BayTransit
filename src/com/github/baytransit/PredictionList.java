@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class PredictionList {
 	private ArrayList<String[]> _predLineList;
-	//String array in format Seconds, Route, dirTag
+	//String array in format Seconds, routeCode, routeName, dirName
 	private String _code;
 	
 	public PredictionList(String stopC) {
@@ -15,13 +15,13 @@ public class PredictionList {
 	public String getCode() {
 		return _code;
 	}
-	public void addPrediction(String route, String dirTag, String dirName, String minutes) {
+	public void addPrediction(String routeCode, String routeName, String dirName, String minutes) {
 		int seconds = Integer.parseInt(minutes) * 60;
-		String[] temp = {Integer.toString(seconds), route, dirTag, dirName};
+		String[] temp = {Integer.toString(seconds), routeCode, routeName, dirName};
 		_predLineList.add(temp);
 	}
-	public void addPrediction(String route, String dirTag, String dirName, String minutes, String seconds) {
-		String[] temp = {seconds, route, dirTag, dirName};
+	public void addPrediction(String routeCode, String routeName, String dirName, String minutes, String seconds) {
+		String[] temp = {seconds, routeCode, routeName, dirName};
 		_predLineList.add(temp);
 	}
 	public ArrayList<String[]> getList() {

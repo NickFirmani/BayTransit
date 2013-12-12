@@ -20,8 +20,9 @@ public class PredictionAdapter extends BaseAdapter {
 		_context = context;
 		_predList = predList;
 		_routeCode = routeCode;
+		processLines(); //possibly put in asynctask
 	}
-	public void processLines() {
+	public void processLines() { 
 		ArrayList<String[]> fromList = _predList.getList();
 		int posRoute = 0;
 		for (int k = 0; k < fromList.size(); k += 1) {
@@ -38,11 +39,11 @@ public class PredictionAdapter extends BaseAdapter {
 	}
 	@SuppressLint("DefaultLocale") //TODO
 	private String formatLine(String[] inpData) {
-		//takes seconds, route, dirtag, dirname
+		//takes seconds, routecode, routename , dirname
 		int seconds = Integer.parseInt(inpData[0]);
 		int minutes = seconds % 60;
 		String str = String.format("%d:%02d", minutes, seconds); 
-		return inpData[1] + " in " + str + " " + inpData[3];
+		return inpData[2] + " in " + str + " " + inpData[3];
 	}
 	@Override
 	public int getCount() {

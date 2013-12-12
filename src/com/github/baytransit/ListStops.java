@@ -233,6 +233,7 @@ public class ListStops extends Activity {
 		Intent outIntent = new Intent(this, ListPredictions.class);
 		outIntent.putExtra("stopInfo", intentStringArr);
 		outIntent.putExtra("agencyName", agencyName);
+		outIntent.putExtra("routeCode", mRoute.getRouteNameCode());
 		Byte outB = (byte) (mAgency.getAPIstem() == 0 ? 0 : 1);
 		outIntent.putExtra("agencyStem", outB);
 		startActivity(outIntent);

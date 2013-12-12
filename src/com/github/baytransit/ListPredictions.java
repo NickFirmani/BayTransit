@@ -36,8 +36,6 @@ public class ListPredictions extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_predictions);
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_list_stops);
 		mListview = (ListView) findViewById(R.id.pred_listview);
         mProgbar = (ProgressBar) findViewById(R.id.pred_progressbar);
 		Intent mIntent = getIntent();
@@ -48,9 +46,11 @@ public class ListPredictions extends Activity {
 		setTitle(stopInfo[1]);
 		if (agencyStem == 0) {
 			String toFormat = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopCode.aspx?token=7e3c99b6-1126-4e23-af9e-26cd5e5e0197&stopcode=%s";
+			Log.d("Getting API Data", String.format(toFormat, stopInfo[0]));
 			getApiData(String.format(toFormat, stopInfo[0]));
 		} else if (agencyStem == 1) {
-			String toFormat = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=&s&stopId=&s";
+			String toFormat = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=%s&stopId=%s";
+			Log.d("Getting API Data", String.format(toFormat, agencyCode, stopInfo[0]));
 			getApiData(String.format(toFormat, agencyCode, stopInfo[0])); //TODO FIXME
 		}
 	}
@@ -106,7 +106,6 @@ public class ListPredictions extends Activity {
             		routeName = xpp.getAttributeValue(null, "Name");
             		routeCode = xpp.getAttributeValue(null, "Code");
             		xpp.nextTag();
-            		xpp.nextTag();
             		while(!xpp.getName().equals("Route")) {
             			
             			if (xpp.getEventType() == XmlPullParser.START_TAG && xpp.getName().equals("RouteDirection")) {
@@ -122,6 +121,9 @@ public class ListPredictions extends Activity {
             		}
            		}
             	eventType = xpp.next();
+            	if (eventType == XmlPullParser.END_DOCUMENT) {
+            		doOnFinishParse(0, predList);
+            	}
             }
     	} catch (XmlPullParserException e) {
     		Log.e("ListRoutes", e.getMessage());
@@ -139,7 +141,6 @@ public class ListPredictions extends Activity {
 				}
     		}
     	}
-    	doOnFinishParse(0, predList);
 	}
 	private void parseNbXml(File fileIn) {
 		Log.d("ListPred", "ParsingNextBusXML");
@@ -154,7 +155,6 @@ public class ListPredictions extends Activity {
             int eventType = xpp.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
             	if (xpp.getEventType() == XmlPullParser.START_TAG && xpp.getName().equals("predictions")) {
-            		Log.d("XPP", "Got here");
             		String routeCode;
                 	String routeName;
                 	String dirName = "";
@@ -162,7 +162,6 @@ public class ListPredictions extends Activity {
                 	String seconds;
             		routeName = xpp.getAttributeValue(null, "routeTitle");
             		routeCode = xpp.getAttributeValue(null, "routeTag");
-            		xpp.nextTag();
             		xpp.nextTag();
             		while(!xpp.getName().equals("predictions")) {
             			if (xpp.getEventType() == XmlPullParser.START_TAG && xpp.getName().equals("direction")) {
@@ -177,6 +176,9 @@ public class ListPredictions extends Activity {
             		}
            		}
             	eventType = xpp.next();
+            	if (eventType == XmlPullParser.END_DOCUMENT) {
+            		doOnFinishParse(0, predList);
+            	}
             }
     	} catch (XmlPullParserException e) {
     		Log.e("ListRoutes", e.getMessage());
@@ -201,6 +203,14 @@ public class ListPredictions extends Activity {
 		//set adapter
 		//make visible
 		final PredictionAdapter predictAdapt = new PredictionAdapter(this, predList, routeCode);
+		Log.d("PredictionAdapter", "after" + Integer.toString(agencyStem));
+		if (predictAdapt == null) {
+			Log.wtf("PredictionAdapter", "error");
+		} else if (mListview == null) {
+			Log.wtf("Listviewmissing", "error");
+		}else if (mProgbar == null) {
+			Log.wtf("Progbarmissing", "error");
+		}
         mListview.setAdapter(predictAdapt);
         mProgbar.setVisibility(View.GONE);
         mListview.setVisibility(View.VISIBLE);

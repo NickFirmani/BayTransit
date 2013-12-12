@@ -2,13 +2,15 @@ package com.github.baytransit;
 
 import java.util.ArrayList;
 
-import com.github.NickFirmani.baytransit.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.github.NickFirmani.baytransit.R;
 
 public class PredictionAdapter extends BaseAdapter {
 	private Context _context;
@@ -23,6 +25,7 @@ public class PredictionAdapter extends BaseAdapter {
 		processLines(); //possibly put in asynctask
 	}
 	public void processLines() { 
+		Log.d("PredAdapt", "ProcessingLines");
 		ArrayList<String[]> fromList = _predList.getList();
 		int posRoute = 0;
 		for (int k = 0; k < fromList.size(); k += 1) {

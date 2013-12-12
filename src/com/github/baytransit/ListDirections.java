@@ -40,12 +40,13 @@ public class ListDirections extends Activity {
 		Intent intent = getIntent();
         agency = intent.getParcelableExtra("agency");
         //TODO change xml download implementation to background svc
+        
+        
+        route = intent.getParcelableExtra("route");
         if (agency.gethasDir() == false) {
         	Log.d("ListDirections", "Skipped this activity, has no directions");
         	nextActivity(-1);
         }
-        
-        route = intent.getParcelableExtra("route");
         agXmlFile = (File) intent.getSerializableExtra("agXML");
         setTitle(route.getRouteName());
         int apistem = agency.getAPIstem();
@@ -211,13 +212,15 @@ public class ListDirections extends Activity {
 		Intent dirIntent = new Intent(this, ListStops.class);
 		dirIntent.putExtra("agency", agency);
 		dirIntent.putExtra("route", route);
-		if (stopXmlFile != null && stopXmlFile.length() > 0) {
-			dirIntent.putExtra("routeXML", stopXmlFile);
+		//if (stopXmlFile != null && stopXmlFile.length() > 0) {
+			//dirIntent.putExtra("routeXML", stopXmlFile);
+		//}
+		if (n >= 0) {
+			dirIntent.putExtra("dir", route.getDirNames(n)); 
 		}
-		dirIntent.putExtra("dir", route.getDirNames(n)); 
-		Log.d("LD Log", route.getDirNames(n)); //correct for nextbus    
 		startActivity(dirIntent);
 	}
+	
 	
 }
 

@@ -69,20 +69,20 @@ public class AgencyAdapter extends BaseAdapter {
 		//Icon i0 = new icon("meh");
 		//Icon i1 = new icon("bleh");
 		//Icon i2 = new icon("bleh");
-		Agency a3 = new Agency(res.getString(R.string.a3_c), R.drawable.bluea_3, res.getString(R.string.a3_p));
-		Agency a4 = new Agency(res.getString(R.string.a4_c), R.drawable.sample_3, res.getString(R.string.a4_p));
-		Agency a5 = new Agency(res.getString(R.string.a5_c), R.drawable.sample_4, res.getString(R.string.a5_p));
-		Agency a6 = new Agency(res.getString(R.string.a6_c), R.drawable.sample_5, res.getString(R.string.a6_p));
-		Agency a7 = new Agency(res.getString(R.string.a7_c), R.drawable.sample_6, res.getString(R.string.a7_p));
-		Agency a8 = new Agency(res.getString(R.string.a8_c), R.drawable.sample_7, res.getString(R.string.a8_p));
-		Agency a9 = new Agency(res.getString(R.string.a9_c), R.drawable.sample_1, res.getString(R.string.a9_p));
-		Agency a10 = new Agency(res.getString(R.string.a10_c), R.drawable.sample_2, res.getString(R.string.a10_p));
-		Agency a11 = new Agency(res.getString(R.string.a11_c), R.drawable.sample_3, res.getString(R.string.a11_p));
-		Agency a12 = new Agency(res.getString(R.string.a12_c), R.drawable.sample_4, res.getString(R.string.a12_p));
+		Agency a3 = new Agency(res.getString(R.string.a3_c), R.drawable.actransit, res.getString(R.string.a3_p));
+		Agency a4 = new Agency(res.getString(R.string.a4_c), R.drawable.bart, res.getString(R.string.a4_p));
+		Agency a5 = new Agency(res.getString(R.string.a5_c), R.drawable.caltrain, res.getString(R.string.a5_p));
+		Agency a6 = new Agency(res.getString(R.string.a6_c), R.drawable.db, res.getString(R.string.a6_p));
+		Agency a7 = new Agency(res.getString(R.string.a7_c), R.drawable.emery, res.getString(R.string.a7_p));
+		Agency a8 = new Agency(res.getString(R.string.a8_c), R.drawable.muni, res.getString(R.string.a8_p));
+		Agency a9 = new Agency(res.getString(R.string.a9_c), R.drawable.samtrans, res.getString(R.string.a9_p));
+		Agency a10 = new Agency(res.getString(R.string.a10_c), R.drawable.ucsf, res.getString(R.string.a10_p));
+		Agency a11 = new Agency(res.getString(R.string.a11_c), R.drawable.vta, res.getString(R.string.a11_p));
+		Agency a12 = new Agency(res.getString(R.string.a12_c), R.drawable.westcat, res.getString(R.string.a12_p));
 		
-		objlist.put(0, a9);//FIXME
+		objlist.put(0, a10);//FIXME
 		objlist.put(1, a10);//q
-		objlist.put(2, a11);//q
+		objlist.put(2, a10);//q
 		objlist.put(3, a3);
 		objlist.put(4, a4);
 		objlist.put(5, a5);

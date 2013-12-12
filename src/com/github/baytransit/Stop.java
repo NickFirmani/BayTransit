@@ -1,7 +1,7 @@
 package com.github.baytransit;
 
 public abstract class Stop {
-    private String _stopCode;
+    protected String _stopCode;
     private String _stopName;
     public Stop(String stopCode) {
         _stopCode = stopCode;

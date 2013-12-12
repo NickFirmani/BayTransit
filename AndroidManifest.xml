@@ -48,6 +48,10 @@
             android:name="com.github.baytransit.ListStops"
             android:label="@string/title_activity_list_stops" >
         </activity>
+        <activity
+            android:name="com.github.baytransit.ListPredictions"
+            android:label="@string/title_activity_list_predictions" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,10 +1,14 @@
 package com.github.baytransit;
 
 public abstract class Stop {
-    private String _stopCode;
+    protected String _stopCode;
     private String _stopName;
     public Stop(String stopCode) {
         _stopCode = stopCode;
+    }
+    public Stop(String stopCode, String stopName) {
+    	_stopCode = stopCode;
+    	_stopName = stopName;
     }
     public String getStopCode() {
         return _stopCode;

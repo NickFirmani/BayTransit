@@ -7,7 +7,7 @@ import java.util.Map;
 import android.os.Parcel;
 import android.os.Parcelable;
 public class Agency implements Parcelable {
-	private final String _nameCode;
+	private String _nameCode;
 	private String _displayName;
     private Boolean _hasDir;
     private int _imageid;
@@ -65,7 +65,7 @@ public class Agency implements Parcelable {
     public Route getRoute(String RouteCode) {
         return _routes.get(RouteCode);
     }
-    public Route getRoute(int posNum) {
+    public Route getRoute(int posNum) { //FIXME
     	Collection<Route> tempc = _routes.values();
     	Iterator<Route> iterr = tempc.iterator();
     	for (int k = 0; k <= tempc.size(); k += 1) {

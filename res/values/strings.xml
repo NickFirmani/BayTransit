@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyDashes">
 
     <string name="app_name">BayTransit</string>
@@ -8,10 +7,16 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="hello_world2">Hell2 world!</string>
     <string name="title_activity_routes_page">RoutesPage</string>
     <string name="title_activity_list_routes">ListRoutes</string>
     <string name="route_data_err">Could not get route data</string>
     <string name="agency_api_stem_0">http://services.my511.org/Transit2.0/GetRoutesForAgency.aspx?token=7e3c99b6-1126-4e23-af9e-26cd5e5e0197&amp;agencyName=</string>
     <string name="agency_api_stem_1">http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&amp;a=</string>
+    <string name="title_activity_list_directions">ListDirections</string>
+    <string name="title_activity_list_stops">ListStops</string>
+    <string name="max_route_age_millis">7884000000</string>
+    <string name="title_activity_list_predictions">ListPredictions</string>
+    <string name="other_routes">Other routes serving this location:</string>
 
 </resources>

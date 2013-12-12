@@ -5,12 +5,12 @@ import java.util.Map;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 //TODO clean this shit up but leave the constructor
 public class RouteNextBus extends Route {
 	    private String _routeName;
 	    private String _routeCode;
-	    private Boolean _directional;
 	    private String _direction1;
 	    private String _direction2;
 	    private Map<String, Stop> _stops1 = new LinkedHashMap<String, Stop>();
@@ -22,22 +22,22 @@ public class RouteNextBus extends Route {
 	    	_routeCode = tempsarr[1];
 	    	_direction1 = tempsarr[2];
 	    	_direction2 = tempsarr[3];
-	    	_directional = in.createBooleanArray()[0];
 	    }
 	    
 	    public RouteNextBus(String routeCode) {
 	        _routeCode = routeCode;
-	        _directional = false;
 	    }
 	    public RouteNextBus(String routeCode, String routeName) {
 	        _routeCode = routeCode;
 	        _routeName = routeName;
 	    }
 	    public void writeToParcel(Parcel out, int flags) {
-	    	String[] temparr = {_routeName, _routeCode, _direction1, _direction2};
-	    	out.writeStringArray(temparr);
-	    	boolean[] tempbool = {_directional};
-	    	out.writeBooleanArray(tempbool);
+	    	try { 
+	    		String[] temparr = {_routeName, _routeCode, _direction1, _direction2};
+	    		out.writeStringArray(temparr);
+	    	} catch (NullPointerException e) {
+	    		Log.wtf("nbParcelErr", "Null pointer exception"); 
+	    	}
 	    }
 	    public void setRouteName(String name) {
 	        _routeName = name;
@@ -48,19 +48,13 @@ public class RouteNextBus extends Route {
 	    public String getRouteNameCode() {
 	        return _routeCode;
 	    }
-	    public void setDirName(String name, int dirNum) {
-	        if (dirNum == 1) {
-	            _direction1 = name;
-	        } else if (dirNum == 2) {
-	            _direction2 = name;
-	        } else {System.out.println("MALFORMED ARGS");}
-	    }
+	    
 	    public void addStop(String stopCode, Stop stop, int dirNum) {
 	        if (dirNum == 1) {
 	            _stops1.put(stopCode, stop);
 	        } else if (dirNum == 2) {
 	            _stops2.put(stopCode,stop);
-	        } else {System.out.print("MALFORMED ARGS");}
+	        } else {Log.e("RouteNB", "MALFORMED ARGS");}
 	    }
 	    public void addStop(String stopCode, Stop stop) {
 	        _stops1.put(stopCode, stop);
@@ -71,7 +65,7 @@ public class RouteNextBus extends Route {
 	        } else if (dirNum == 2) {
 	            return _stops2;
 	        } else {
-	            System.out.print("MALFORMED ARGS");
+	            Log.e("RouteNB", "MALFORMED ARGS");
 	            return null;
 	        }
 	    }

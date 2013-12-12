@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.github.baytransit;
+package com.github.NickFirmani.baytransit;
 
 public final class R {
     public static final class attr {
@@ -235,19 +235,29 @@ containing a value of this type.
         public static final int default_gap=0x7f050000;
     }
     public static final class drawable {
-        public static final int bluea_3=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int sample_0=0x7f020002;
-        public static final int sample_1=0x7f020003;
-        public static final int sample_2=0x7f020004;
-        public static final int sample_3=0x7f020005;
-        public static final int sample_4=0x7f020006;
-        public static final int sample_5=0x7f020007;
-        public static final int sample_6=0x7f020008;
-        public static final int sample_7=0x7f020009;
+        public static final int actransit=0x7f020000;
+        public static final int bart=0x7f020001;
+        public static final int bluea_3=0x7f020002;
+        public static final int caltrain=0x7f020003;
+        public static final int db=0x7f020004;
+        public static final int emery=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int muni=0x7f020007;
+        public static final int sample_0=0x7f020008;
+        public static final int sample_1=0x7f020009;
+        public static final int sample_2=0x7f02000a;
+        public static final int sample_3=0x7f02000b;
+        public static final int sample_4=0x7f02000c;
+        public static final int sample_5=0x7f02000d;
+        public static final int sample_6=0x7f02000e;
+        public static final int sample_7=0x7f02000f;
+        public static final int samtrans=0x7f020010;
+        public static final int ucsf=0x7f020011;
+        public static final int vta=0x7f020012;
+        public static final int westcat=0x7f020013;
     }
     public static final class id {
-        public static final int action_settings=0x7f040014;
+        public static final int action_settings=0x7f04001c;
         public static final int alignBounds=0x7f040002;
         public static final int alignMargins=0x7f040003;
         public static final int bottom=0x7f040005;
@@ -256,28 +266,42 @@ containing a value of this type.
         public static final int center_vertical=0x7f040008;
         public static final int clip_horizontal=0x7f04000f;
         public static final int clip_vertical=0x7f04000e;
+        public static final int direction1=0x7f040012;
+        public static final int direction2=0x7f040013;
         public static final int end=0x7f040011;
         public static final int fill=0x7f04000d;
         public static final int fill_horizontal=0x7f04000b;
         public static final int fill_vertical=0x7f040009;
-        public static final int gridview=0x7f040013;
+        public static final int gridview=0x7f04001b;
         public static final int horizontal=0x7f040000;
         public static final int left=0x7f040006;
-        public static final int listview=0x7f040012;
+        public static final int listdir_progressbar=0x7f040014;
+        public static final int listview=0x7f040017;
+        public static final int pred_listview=0x7f040015;
+        public static final int pred_progressbar=0x7f040016;
+        public static final int progressbar=0x7f040018;
         public static final int right=0x7f040007;
         public static final int start=0x7f040010;
+        public static final int stops_listview=0x7f040019;
+        public static final int stops_progressbar=0x7f04001a;
         public static final int top=0x7f040004;
         public static final int vertical=0x7f040001;
     }
     public static final class layout {
-        public static final int activity_list_routes=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_routes_page=0x7f030002;
+        public static final int activity_list_directions=0x7f030000;
+        public static final int activity_list_predictions=0x7f030001;
+        public static final int activity_list_routes=0x7f030002;
+        public static final int activity_list_stops=0x7f030003;
+        public static final int activity_main=0x7f030004;
+        public static final int activity_routes_page=0x7f030005;
     }
     public static final class menu {
-        public static final int list_routes=0x7f090000;
-        public static final int main=0x7f090001;
-        public static final int routes_page=0x7f090002;
+        public static final int list_directions=0x7f090000;
+        public static final int list_predictions=0x7f090001;
+        public static final int list_routes=0x7f090002;
+        public static final int list_stops=0x7f090003;
+        public static final int main=0x7f090004;
+        public static final int routes_page=0x7f090005;
     }
     public static final class string {
         public static final int a10_c=0x7f07000e;
@@ -306,16 +330,22 @@ containing a value of this type.
         public static final int a9_c=0x7f07000c;
         public static final int a9_p=0x7f07000d;
         public static final int action_settings=0x7f070018;
-        public static final int agency_api_stem_0=0x7f07001d;
-        public static final int agency_api_stem_1=0x7f07001e;
+        public static final int agency_api_stem_0=0x7f07001e;
+        public static final int agency_api_stem_1=0x7f07001f;
         public static final int app_name=0x7f070014;
         public static final int dummy_button=0x7f070015;
         public static final int dummy_content=0x7f070016;
         public static final int hello_world=0x7f070019;
-        public static final int route_data_err=0x7f07001c;
-        public static final int title_activity_list_routes=0x7f07001b;
+        public static final int hello_world2=0x7f07001a;
+        public static final int max_route_age_millis=0x7f070022;
+        public static final int other_routes=0x7f070024;
+        public static final int route_data_err=0x7f07001d;
+        public static final int title_activity_list_directions=0x7f070020;
+        public static final int title_activity_list_predictions=0x7f070023;
+        public static final int title_activity_list_routes=0x7f07001c;
+        public static final int title_activity_list_stops=0x7f070021;
         public static final int title_activity_main=0x7f070017;
-        public static final int title_activity_routes_page=0x7f07001a;
+        public static final int title_activity_routes_page=0x7f07001b;
     }
     public static final class style {
         /** 
@@ -364,8 +394,8 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ButtonBarContainerTheme_buttonBarButtonStyle com.github.baytransit:buttonBarButtonStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ButtonBarContainerTheme_buttonBarStyle com.github.baytransit:buttonBarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ButtonBarContainerTheme_buttonBarButtonStyle com.github.NickFirmani.baytransit:buttonBarButtonStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ButtonBarContainerTheme_buttonBarStyle com.github.NickFirmani.baytransit:buttonBarStyle}</code></td><td></td></tr>
            </table>
            @see #ButtonBarContainerTheme_buttonBarButtonStyle
            @see #ButtonBarContainerTheme_buttonBarStyle
@@ -374,23 +404,23 @@ containing a value of this type.
             0x7f01000c, 0x7f01000d
         };
         /**
-          <p>This symbol is the offset where the {@link com.github.baytransit.R.attr#buttonBarButtonStyle}
+          <p>This symbol is the offset where the {@link com.github.NickFirmani.baytransit.R.attr#buttonBarButtonStyle}
           attribute's value can be found in the {@link #ButtonBarContainerTheme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.github.baytransit:buttonBarButtonStyle
+          @attr name com.github.NickFirmani.baytransit:buttonBarButtonStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarButtonStyle = 1;
         /**
-          <p>This symbol is the offset where the {@link com.github.baytransit.R.attr#buttonBarStyle}
+          <p>This symbol is the offset where the {@link com.github.NickFirmani.baytransit.R.attr#buttonBarStyle}
           attribute's value can be found in the {@link #ButtonBarContainerTheme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.github.baytransit:buttonBarStyle
+          @attr name com.github.NickFirmani.baytransit:buttonBarStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarStyle = 0;
         /** Attributes that can be used with a GridLayout.
@@ -399,20 +429,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #GridLayout_alignmentMode com.github.baytransit:alignmentMode}</code></td><td>
+           <tr><td><code>{@link #GridLayout_alignmentMode com.github.NickFirmani.baytransit:alignmentMode}</code></td><td>
         When set to alignMargins, causes alignment to take place between the outer
         boundary of a view, as defined by its margins.</td></tr>
-           <tr><td><code>{@link #GridLayout_columnCount com.github.baytransit:columnCount}</code></td><td> The maximum number of columns to create when automatically positioning children.</td></tr>
-           <tr><td><code>{@link #GridLayout_columnOrderPreserved com.github.baytransit:columnOrderPreserved}</code></td><td>
+           <tr><td><code>{@link #GridLayout_columnCount com.github.NickFirmani.baytransit:columnCount}</code></td><td> The maximum number of columns to create when automatically positioning children.</td></tr>
+           <tr><td><code>{@link #GridLayout_columnOrderPreserved com.github.NickFirmani.baytransit:columnOrderPreserved}</code></td><td>
         When set to true, forces column boundaries to appear in the same order
         as column indices.</td></tr>
-           <tr><td><code>{@link #GridLayout_orientation com.github.baytransit:orientation}</code></td><td>
+           <tr><td><code>{@link #GridLayout_orientation com.github.NickFirmani.baytransit:orientation}</code></td><td>
               support versions.</td></tr>
-           <tr><td><code>{@link #GridLayout_rowCount com.github.baytransit:rowCount}</code></td><td> The maximum number of rows to create when automatically positioning children.</td></tr>
-           <tr><td><code>{@link #GridLayout_rowOrderPreserved com.github.baytransit:rowOrderPreserved}</code></td><td>
+           <tr><td><code>{@link #GridLayout_rowCount com.github.NickFirmani.baytransit:rowCount}</code></td><td> The maximum number of rows to create when automatically positioning children.</td></tr>
+           <tr><td><code>{@link #GridLayout_rowOrderPreserved com.github.NickFirmani.baytransit:rowOrderPreserved}</code></td><td>
         When set to true, forces row boundaries to appear in the same order
         as row indices.</td></tr>
-           <tr><td><code>{@link #GridLayout_useDefaultMargins com.github.baytransit:useDefaultMargins}</code></td><td>
+           <tr><td><code>{@link #GridLayout_useDefaultMargins com.github.NickFirmani.baytransit:useDefaultMargins}</code></td><td>
         When set to true, tells GridLayout to use default margins when none are specified
         in a view's layout parameters.</td></tr>
            </table>
@@ -456,7 +486,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.github.baytransit:alignmentMode
+          @attr name com.github.NickFirmani.baytransit:alignmentMode
         */
         public static final int GridLayout_alignmentMode = 4;
         /**
@@ -472,7 +502,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.github.baytransit:columnCount
+          @attr name com.github.NickFirmani.baytransit:columnCount
         */
         public static final int GridLayout_columnCount = 2;
         /**
@@ -493,7 +523,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.github.baytransit:columnOrderPreserved
+          @attr name com.github.NickFirmani.baytransit:columnOrderPreserved
         */
         public static final int GridLayout_columnOrderPreserved = 6;
         /**
@@ -525,7 +555,7 @@ containing a value of this type.
 <tr><td><code>vertical</code></td><td>1</td><td> Defines a vertical widget. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.github.baytransit:orientation
+          @attr name com.github.NickFirmani.baytransit:orientation
         */
         public static final int GridLayout_orientation = 0;
         /**
@@ -541,7 +571,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.github.baytransit:rowCount
+          @attr name com.github.NickFirmani.baytransit:rowCount
         */
         public static final int GridLayout_rowCount = 1;
         /**
@@ -562,7 +592,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.github.baytransit:rowOrderPreserved
+          @attr name com.github.NickFirmani.baytransit:rowOrderPreserved
         */
         public static final int GridLayout_rowOrderPreserved = 5;
         /**
@@ -583,7 +613,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.github.baytransit:useDefaultMargins
+          @attr name com.github.NickFirmani.baytransit:useDefaultMargins
         */
         public static final int GridLayout_useDefaultMargins = 3;
         /** Attributes that can be used with a GridLayout_Layout.
@@ -606,19 +636,19 @@ containing a value of this type.
               Specifies extra space on the top side of this view.</td></tr>
            <tr><td><code>{@link #GridLayout_Layout_android_layout_width android:layout_width}</code></td><td>
               support versions.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_layout_column com.github.baytransit:layout_column}</code></td><td>
+           <tr><td><code>{@link #GridLayout_Layout_layout_column com.github.NickFirmani.baytransit:layout_column}</code></td><td>
         The column boundary delimiting the left of the group of cells
         occupied by this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_layout_columnSpan com.github.baytransit:layout_columnSpan}</code></td><td>
+           <tr><td><code>{@link #GridLayout_Layout_layout_columnSpan com.github.NickFirmani.baytransit:layout_columnSpan}</code></td><td>
         The column span: the difference between the right and left
         boundaries delimiting the group of cells occupied by this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_layout_gravity com.github.baytransit:layout_gravity}</code></td><td>
+           <tr><td><code>{@link #GridLayout_Layout_layout_gravity com.github.NickFirmani.baytransit:layout_gravity}</code></td><td>
         Gravity specifies how a component should be placed in its group of cells.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_layout_row com.github.baytransit:layout_row}</code></td><td> END MarginLayout layoutparams 
+           <tr><td><code>{@link #GridLayout_Layout_layout_row com.github.NickFirmani.baytransit:layout_row}</code></td><td> END MarginLayout layoutparams 
 
         The row boundary delimiting the top of the group of cells
         occupied by this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_layout_rowSpan com.github.baytransit:layout_rowSpan}</code></td><td>
+           <tr><td><code>{@link #GridLayout_Layout_layout_rowSpan com.github.NickFirmani.baytransit:layout_rowSpan}</code></td><td>
         The row span: the difference between the bottom and top
         boundaries delimiting the group of cells occupied by this view.</td></tr>
            </table>
@@ -735,7 +765,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.github.baytransit:layout_column
+          @attr name com.github.NickFirmani.baytransit:layout_column
         */
         public static final int GridLayout_Layout_layout_column = 9;
         /**
@@ -756,7 +786,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.github.baytransit:layout_columnSpan
+          @attr name com.github.NickFirmani.baytransit:layout_columnSpan
         */
         public static final int GridLayout_Layout_layout_columnSpan = 10;
         /**
@@ -801,7 +831,7 @@ containing a value of this type.
 <tr><td><code>end</code></td><td>0x00800005</td><td> Push object to the end of its container, not changing its size. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.github.baytransit:layout_gravity
+          @attr name com.github.NickFirmani.baytransit:layout_gravity
         */
         public static final int GridLayout_Layout_layout_gravity = 11;
         /**
@@ -821,7 +851,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.github.baytransit:layout_row
+          @attr name com.github.NickFirmani.baytransit:layout_row
         */
         public static final int GridLayout_Layout_layout_row = 7;
         /**
@@ -842,7 +872,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.github.baytransit:layout_rowSpan
+          @attr name com.github.NickFirmani.baytransit:layout_rowSpan
         */
         public static final int GridLayout_Layout_layout_rowSpan = 8;
     };

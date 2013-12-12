@@ -2,6 +2,8 @@ package com.github.baytransit;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 public class PredictionList {
 	private ArrayList<String[]> _predLineList;
 	//String array in format Seconds, routeCode, routeName, dirName
@@ -10,6 +12,7 @@ public class PredictionList {
 	public PredictionList(String stopC) {
 		_code = stopC;
 		_predLineList = new ArrayList<String[]>();
+		Log.d("PredictionList", "Created Successfully");
 	}
 	
 	public String getCode() {

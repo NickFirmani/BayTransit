@@ -120,9 +120,9 @@ public class ListStops extends Activity {
 
             		//add to stopsbytag array
             		if (name != null && name.equals("route") && xpp.getEventType() == XmlPullParser.START_TAG) {
-            			Log.d("XPP", "0 Name is: " + name + " at line: " + xpp.getLineNumber());
+            			//Log.d("XPP", "0 Name is: " + name + " at line: " + xpp.getLineNumber());
             			xpp.nextTag();
-            			Log.d("XPP", "1 Name is: " + name + " at line: " + xpp.getLineNumber());
+            			//Log.d("XPP", "1 Name is: " + name + " at line: " + xpp.getLineNumber());
             			while (!xpp.getName().equals("direction")) {
             				
             				String tTag = xpp.getAttributeValue(null, "tag");
@@ -133,7 +133,7 @@ public class ListStops extends Activity {
             				String[] tArr = {tTitle, tLat, tLon, tStopId};
             				stopsByTag.put(tTag, tArr);
             				xpp.nextTag();
-            				Log.d("XPP", "2 Name is: " + name + " at line: " + xpp.getLineNumber());
+            				//Log.d("XPP", "2 Name is: " + name + " at line: " + xpp.getLineNumber());
             			}
             		}
             		
@@ -142,7 +142,7 @@ public class ListStops extends Activity {
             				&& xpp.getEventType() == XmlPullParser.START_TAG
             				&& xpp.getAttributeValue(null, "tag").equals(mDirCode)) {
             			xpp.nextTag();
-            			Log.d("XPP", "3 Name is: " + name + " at line: " + xpp.getLineNumber());
+            			//Log.d("XPP", "3 Name is: " + name + " at line: " + xpp.getLineNumber());
             			while (!xpp.getName().equals("direction")) {
             				
             				String tTagGet = xpp.getAttributeValue(null, "tag");
@@ -152,7 +152,7 @@ public class ListStops extends Activity {
             				StopNextBus tNbStop = new StopNextBus(tRes[3], tRes[0], tLat, tLon);
             				mRoute.addStop(tRes[3], tNbStop);
             				xpp.nextTag();
-            				Log.d("XPP", "4 Name is: " + name + " at line: " + xpp.getLineNumber());
+            				//Log.d("XPP", "4 Name is: " + name + " at line: " + xpp.getLineNumber());
             			}
             		}
              	}

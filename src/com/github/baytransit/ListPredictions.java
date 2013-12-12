@@ -97,6 +97,7 @@ public class ListPredictions extends Activity {
             xpp.setInput(inp);
             int eventType = xpp.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
+            	Log.d("XPP", "Got here");
             	if (xpp.getEventType() == XmlPullParser.START_TAG && xpp.getName().equals("Route")) {
             		String routeCode;
                 	String routeName;
@@ -104,6 +105,7 @@ public class ListPredictions extends Activity {
                 	String minutes;
             		routeName = xpp.getAttributeValue(null, "Name");
             		routeCode = xpp.getAttributeValue(null, "Code");
+            		xpp.nextTag();
             		xpp.nextTag();
             		while(!xpp.getName().equals("Route")) {
             			
@@ -113,6 +115,7 @@ public class ListPredictions extends Activity {
             			} else if (xpp.getEventType() == XmlPullParser.START_TAG && xpp.getName().equals("DepartureTime")) {
             				minutes = xpp.nextText();
             				predList.addPrediction(routeCode, routeName, dirName, minutes);
+            				Log.d("XMLP", "AddPred: " + routeCode + " , " + routeName + " , " + dirName + " , " + minutes);
             			}
             			xpp.nextTag();
             			
@@ -135,8 +138,8 @@ public class ListPredictions extends Activity {
 					Log.e("ListRoutes", e.getMessage());
 				}
     		}
-    		doOnFinishParse(0, predList);
     	}
+    	doOnFinishParse(0, predList);
 	}
 	private void parseNbXml(File fileIn) {
 		Log.d("ListPred", "ParsingNextBusXML");
@@ -151,6 +154,7 @@ public class ListPredictions extends Activity {
             int eventType = xpp.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
             	if (xpp.getEventType() == XmlPullParser.START_TAG && xpp.getName().equals("predictions")) {
+            		Log.d("XPP", "Got here");
             		String routeCode;
                 	String routeName;
                 	String dirName = "";
@@ -159,6 +163,7 @@ public class ListPredictions extends Activity {
             		routeName = xpp.getAttributeValue(null, "routeTitle");
             		routeCode = xpp.getAttributeValue(null, "routeTag");
             		xpp.nextTag();
+            		xpp.nextTag();
             		while(!xpp.getName().equals("predictions")) {
             			if (xpp.getEventType() == XmlPullParser.START_TAG && xpp.getName().equals("direction")) {
             				dirName = xpp.getAttributeValue(null, "title");
@@ -166,6 +171,7 @@ public class ListPredictions extends Activity {
             				seconds = xpp.getAttributeValue(null, "seconds");
             				minutes = xpp.getAttributeValue(null, "minutes");
             				predList.addPrediction(routeCode, routeName, dirName, minutes, seconds);
+            				Log.d("XMLP", "AddPred: " + routeCode + " , " + routeName + " , " + dirName + " , " + minutes);
             			}
             			xpp.nextTag();
             		}
@@ -187,8 +193,8 @@ public class ListPredictions extends Activity {
 					Log.e("ListRoutes", e.getMessage());
 				}
     		}
-    		doOnFinishParse(1, predList);
     	}
+    	doOnFinishParse(1, predList);
 	}
 	private void doOnFinishParse(int agencyStem, PredictionList predList) {
 		//create adapter

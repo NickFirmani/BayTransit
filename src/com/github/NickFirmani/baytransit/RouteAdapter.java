@@ -1,9 +1,5 @@
 package com.github.NickFirmani.baytransit;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +9,15 @@ import android.widget.TextView;
 public class RouteAdapter extends BaseAdapter {
 	private Context _context;
 	private Agency _agency;
-	private ArrayList<String> _routes = new ArrayList<String>();
+	
 	public RouteAdapter(Context context, Agency agency) {
 		_context = context;
 		_agency = agency;
-		Collection<Route> rou = _agency.getAllRoutes();
-		for (Iterator<Route> rouIter = rou.iterator(); rouIter.hasNext();) {
-			Route tempr = rouIter.next();
-			_routes.add(tempr.getRouteName()); //TODO fix this data struct?
-		}
 	}
 
 	@Override
 	public int getCount() {
-		return _routes.size();
+		return _agency.getNumberOfRoutes();
 	}
 
 	@Override

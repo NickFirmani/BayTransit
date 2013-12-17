@@ -46,7 +46,7 @@ public class ListRoutes extends Activity {
         setContentView(R.layout.activity_list_routes);
         Intent intent = getIntent();
         agency = intent.getParcelableExtra("agency");
-        setTitle(agency.getDisplayName());
+        setTitle(agency.getName());
         
         listview = (ListView) findViewById(R.id.listview);
         progbar = (ProgressBar) findViewById(R.id.progressbar);
@@ -134,7 +134,7 @@ public class ListRoutes extends Activity {
     	int val = agency.getAPIstem();
     	String api0 = val == 0 ? getString(R.string.agency_api_stem_0) :
     		getString(R.string.agency_api_stem_1);
-    	String api1 = agency.getNameCode();
+    	String api1 = agency.getCode();
     	apiurl = api0 + api1;
     	filename = apiurl.substring(apiurl.length()-15).replaceAll("[^a-zA-Z]","");
     

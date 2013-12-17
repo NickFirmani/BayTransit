@@ -2,14 +2,12 @@ package com.github.NickFirmani.baytransit;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import com.github.NickFirmani.baytransit.R;
 
 public class AgencyAdapter extends BaseAdapter {
 	private Context mContext;
@@ -22,13 +20,7 @@ public class AgencyAdapter extends BaseAdapter {
 	}
 	
 	public int getCount() {
-		//find a better way to do this.
-		if (objlist.size() != 0) {
-			return objlist.size();
-		} else {
-			Log.e("AgencyAdapter", "Went to bad code.");
-			return 13; 
-		}
+		return objlist.size();
 	}
 	
 	public Object getItem(int position) {
@@ -58,7 +50,7 @@ public class AgencyAdapter extends BaseAdapter {
 			//DO STUFF FOR NOT AGENCIES
 		} else {
 			Agency targetagency = (Agency) objlist.get(position);
-			imageView.setImageResource(targetagency.getImageid());
+			imageView.setImageResource(targetagency.getImageId());
 		}
 		return imageView;
 	}

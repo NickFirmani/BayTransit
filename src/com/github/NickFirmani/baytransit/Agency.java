@@ -4,56 +4,48 @@ import android.os.Parcelable;
 import android.util.SparseArray;
 
 public class Agency implements Parcelable {
-	private String _nameCode;
-	private String _displayName;
-    private Boolean _hasDir;
-    private int _imageid;
-    private SparseArray<Route> _routes = new SparseArray<Route>();
+	private final String _agencyCode;
+	private final String _agencyName;
+    private final Boolean _hasDir;
+    private final int _imageId;
+    private AlphaHashSparseArray<Route> _routes = new AlphaHashSparseArray<Route>();
     
-    public Agency(String nameCode, int imageid, String dname) {
-    	_nameCode = nameCode;
-    	_imageid = imageid;
-    	_hasDir = nameCode.equals("BART") ? false : true;
-    	_displayName = dname;
+    public Agency(String agencyCode, int imageId, String agencyName) {
+    	_agencyCode = agencyCode;
+    	_imageId = imageId;
+    	_hasDir = agencyCode.equals("BART") ? false : true;
+    	_agencyName = agencyName;
     }
     private Agency(Parcel in) {
-        _imageid = in.readInt();
+        _imageId = in.readInt();
         String [] tempstr = in.createStringArray();
-        _nameCode = tempstr[0];
-        _displayName = tempstr[1];
-        _hasDir = _nameCode.equals("BART") ? false : true;
+        _agencyCode = tempstr[0];
+        _agencyName = tempstr[1];
+        _hasDir = _agencyCode.equals("BART") ? false : true;
     }
     
-	public String getNameCode() {
-		return _nameCode;
+	public String getCode() {
+		return _agencyCode;
 	}
     
-    public void setDisplayName(String dName) {
-        _displayName = dName;
-    }
-    
-	public String getDisplayName() {
-		return _displayName;
+	public String getName() {
+		return _agencyName;
 	}
     
     public Boolean gethasDir() {
         return _hasDir;
     }
 
-    public void setDir(Boolean hasDir) {
-        _hasDir = hasDir;
-    }
-
-	public int getImageid() {
-		return _imageid;
+	public int getImageId() {
+		return _imageId;
 	}
-
-	public void setImageid(int imageid) {
-		this._imageid = imageid;
+	
+	public int getNumberOfRoutes() {
+		return _routes.size();
 	}
 	
 	public void addRoute(String routeCode, Route route) {
-        _routes.put(routeCode.hashCode(), route);
+        _routes.put(routeCode, route);
     }
 	
 	public void addRoute(int posNo, Route route) {
@@ -61,10 +53,10 @@ public class Agency implements Parcelable {
 	}
 	
     public Route getRoute(String routeCode) {
-        return _routes.get(routeCode.hashCode());
+        return _routes.get(routeCode);
     }
     
-    public Route getRoute(int posNum) { //FIXME
+    public Route getRoute(int posNum) {
     	return _routes.get(_routes.keyAt(posNum));
     }
     
@@ -75,9 +67,9 @@ public class Agency implements Parcelable {
     //zero is 511
     //one is nextbus
     public int getAPIstem() {
-    	if (_nameCode.equals("BART") || _nameCode.equals("Caltrain") ||
-    			_nameCode.equals("SamTrans") || _nameCode.equals("VTA") ||
-    			_nameCode.equals("WESTCAT")) {
+    	if (_agencyCode.equals("BART") || _agencyCode.equals("Caltrain") ||
+    			_agencyCode.equals("SamTrans") || _agencyCode.equals("VTA") ||
+    			_agencyCode.equals("WESTCAT")) {
     		return 0;
     	} else {
     		return 1;
@@ -100,8 +92,8 @@ public class Agency implements Parcelable {
     	}
     };
     public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(_imageid);
-        String[] tempstr = {_nameCode, _displayName};
+        out.writeInt(_imageId);
+        String[] tempstr = {_agencyCode, _agencyName};
         out.writeStringArray(tempstr);
     }
 }

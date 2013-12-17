@@ -58,7 +58,7 @@ public class ListStops extends Activity {
 			Log.d("liststops", "mdircode is: " + mDirCode);
 			if (mAgency.getAPIstem() == 1) { //for nextbus
 				String temp = "http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=%s&r=%s"; //FIXME
-				String apiurl = String.format(temp, mAgency.getNameCode(), mRoute.getRouteNameCode());
+				String apiurl = String.format(temp, mAgency.getCode(), mRoute.getRouteNameCode());
 				routeXml = new File(getFilesDir(), apiurl.substring(apiurl.length()-15).replaceAll("[^a-zA-Z]",""));
 				Log.d("apiurl", apiurl);
 				parseNbXml(routeXml); //should move outside ui thread FIXME
@@ -66,13 +66,13 @@ public class ListStops extends Activity {
 
 			} else if (mAgency.getAPIstem() == 0 && mDirCode != null) { //for 511 //FIXME
 				String temp = "http://services.my511.org/Transit2.0/GetStopsForRoute.aspx?token=7e3c99b6-1126-4e23-af9e-26cd5e5e0197&routeIDF=%s~%s~%s";
-				String apiurl = String.format(temp, mAgency.getNameCode(), mRoute.getRouteNameCode(), mDirCode);
+				String apiurl = String.format(temp, mAgency.getCode(), mRoute.getRouteNameCode(), mDirCode);
 				Log.d("apiurl", apiurl);
 				getRoutesXML(apiurl);
 			} 
 		} else {
 			String temp = "http://services.my511.org/Transit2.0/GetStopsForRoute.aspx?token=7e3c99b6-1126-4e23-af9e-26cd5e5e0197&routeIDF=%s~%s";
-			String apiurl = String.format(temp, mAgency.getNameCode(), mRoute.getRouteNameCode());
+			String apiurl = String.format(temp, mAgency.getCode(), mRoute.getRouteNameCode());
 			Log.d("apiBARTurl", apiurl);
 			getRoutesXML(apiurl);
 		}
@@ -226,7 +226,7 @@ public class ListStops extends Activity {
 	private void onRouteClick(Object stopin) {
 		Stop tempStop = (Stop) stopin;
 		String[] intentStringArr = {tempStop.getStopCode(), tempStop.getStopName()}; //TODO implement parcelable
-		String agencyName = mAgency.getNameCode();
+		String agencyName = mAgency.getCode();
 		Intent outIntent = new Intent(this, ListPredictions.class);
 		outIntent.putExtra("stopInfo", intentStringArr);
 		outIntent.putExtra("agencyName", agencyName);

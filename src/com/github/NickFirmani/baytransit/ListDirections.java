@@ -59,7 +59,7 @@ public class ListDirections extends Activity {
         	doOnFinish();    	
         } else if (apistem == 1) {
         	String temp = "http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=%s&r=%s"; //FIXME
-        	String apiurl = String.format(temp, agency.getNameCode(), route.getRouteNameCode());
+        	String apiurl = String.format(temp, agency.getCode(), route.getRouteNameCode());
         	stopXmlFile = new File(getFilesDir(), apiurl.substring(apiurl.length()-15).replaceAll("[^a-zA-Z]",""));
         	getRoutesXML(apiurl);
         }

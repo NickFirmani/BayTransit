@@ -1,16 +1,14 @@
 package com.github.NickFirmani.baytransit;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.SparseArray;
+
 public class Agency implements Parcelable {
 	private String _nameCode;
 	private String _displayName;
     private Boolean _hasDir;
     private int _imageid;
+    private SparseArray<Route> _routes = new SparseArray<Route>();
     
     public Agency(String nameCode, int imageid, String dname) {
     	_nameCode = nameCode;
@@ -24,11 +22,6 @@ public class Agency implements Parcelable {
         _nameCode = tempstr[0];
         _displayName = tempstr[1];
         _hasDir = _nameCode.equals("BART") ? false : true;
-    }
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(_imageid);
-        String[] tempstr = {_nameCode, _displayName};
-        out.writeStringArray(tempstr);
     }
     
 	public String getNameCode() {
@@ -60,24 +53,23 @@ public class Agency implements Parcelable {
 	}
 	
 	public void addRoute(String routeCode, Route route) {
-        _routes.put(routeCode, route);
+        _routes.put(routeCode.hashCode(), route);
     }
-    public Route getRoute(String RouteCode) {
-        return _routes.get(RouteCode);
+	
+	public void addRoute(int posNo, Route route) {
+		_routes.put(posNo, route);
+	}
+	
+    public Route getRoute(String routeCode) {
+        return _routes.get(routeCode.hashCode());
     }
+    
     public Route getRoute(int posNum) { //FIXME
-    	Collection<Route> tempc = _routes.values();
-    	Iterator<Route> iterr = tempc.iterator();
-    	for (int k = 0; k <= tempc.size(); k += 1) {
-    		Route routeiq = iterr.next();
-    		if (k == posNum) {
-    			return routeiq;
-    		}
-    	}
-    	return null;
+    	return _routes.get(_routes.keyAt(posNum));
     }
-    public Collection<Route> getAllRoutes() {
-    	return _routes.values();
+    
+    public SparseArray<Route> getAllRoutes() {
+    	return _routes;
     }
     
     //zero is 511
@@ -92,9 +84,7 @@ public class Agency implements Parcelable {
     	}
     }
     
-    private Map<String, Route> _routes = new LinkedHashMap<String, Route>();
-    
-    /** Parcelable required resources below */
+    /** Parcelable resources below */
 
     public int describeContents() {
         return 0;
@@ -109,4 +99,9 @@ public class Agency implements Parcelable {
     		return new Agency[size];
     	}
     };
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(_imageid);
+        String[] tempstr = {_nameCode, _displayName};
+        out.writeStringArray(tempstr);
+    }
 }

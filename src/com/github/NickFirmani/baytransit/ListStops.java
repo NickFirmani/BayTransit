@@ -116,8 +116,6 @@ public class ListStops extends Activity {
             while (eventType != XmlPullParser.END_DOCUMENT) {
             	String name = xpp.getName();
             	if (xpp.getEventType() == XmlPullParser.START_TAG || xpp.getEventType() == XmlPullParser.END_TAG) {
-
-            		//add to stopsbytag array
             		if (name != null && name.equals("route") && xpp.getEventType() == XmlPullParser.START_TAG) {
             			//Log.d("XPP", "0 Name is: " + name + " at line: " + xpp.getLineNumber());
             			xpp.nextTag();
